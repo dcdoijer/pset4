@@ -131,7 +131,7 @@ void initBricks(GWindow window)
  */
 GOval initBall(GWindow window)
 {
-    GOval ball = newGOval(200, 300, 20, 20);
+    GOval ball = newGOval(190, 290, 20, 20);
     setColor(ball, "BLACK");
     setFilled(ball, true);
     addGWindow(window, ball);
