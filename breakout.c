@@ -102,6 +102,7 @@ int main(void)
             {
                 removeGWindow(window, object);
                 bricks--;
+                points++;
                 vert = -vert;
             }
         }
@@ -205,8 +206,10 @@ GRect initPaddle(GWindow window)
  */
 GLabel initScoreboard(GWindow window)
 {
-    // TODO
-    return NULL;
+    char* points = "0";
+    GLabel scoreboard = newGLabel(points);
+    addGWindow(window, scoreboard);
+    return scoreboard;
 }
 
 /**
