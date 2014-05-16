@@ -206,8 +206,10 @@ GRect initPaddle(GWindow window)
  */
 GLabel initScoreboard(GWindow window)
 {
-    char* points;
+    char* points = "0";
     GLabel scoreboard = newGLabel(points);
+    setFont(scoreboard, "SansSerif-18");
+    setLocation(scoreboard, 300, 200);
     addGWindow(window, scoreboard);
     return scoreboard;
 }

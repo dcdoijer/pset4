@@ -208,6 +208,8 @@ GLabel initScoreboard(GWindow window)
 {
     char* points = "0";
     GLabel scoreboard = newGLabel(points);
+    setFont(scoreboard, "SansSerif-36");
+    setLocation(scoreboard, (getWidth(window) / 2), (getHeight(window) / 2));
     addGWindow(window, scoreboard);
     return scoreboard;
 }
