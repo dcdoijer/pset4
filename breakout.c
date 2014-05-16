@@ -77,9 +77,58 @@ int main(void)
     // number of points initially
     int points = 0;
 
+    double drand48(void);
+    double vert = 2.0;
+    double hori = 2 * drand48();
+    
+    
     // keep playing until game over
     while (lives > 0 && bricks > 0)
     {
+        move(ball, hori, vert);
+        GObject object = detectCollision(window, ball);
+
+        // if the ball hits the paddle, invert vertical direction    
+        if (object == paddle)
+        {
+            vert = -vert;
+        }
+
+        // if the ball hits a brick, remove brick and
+        // invert vertical direction
+        if (object != NULL)
+        {
+            if (strcmp(getType(object), "GRect") == 0 && object != paddle)
+            {
+                removeGWindow(window, object);
+                bricks--;
+                vert = -vert;
+            }
+        }
+
+        // if the ball hits the top invert direction
+        // if ball hits bottom, deduct life and restart main
+        if (getY(ball) + getHeight(ball) >= HEIGHT)
+        {
+            lives--;
+        }   
+        else if (getY(ball) <= 0)
+        {
+            vert = -vert;
+        }
+        
+        // if the ball hits the sides, invert direction
+        if (getX(ball) + getWidth(ball) >= WIDTH)
+        {
+            hori = -hori;
+        }   
+        else if (getX(ball) <= 0)
+        {
+            hori = -hori;
+        }
+
+        pause(10);
+
         GEvent move_paddle = getNextEvent(MOUSE_EVENT);
 
         if (move_paddle != NULL)
@@ -91,6 +140,7 @@ int main(void)
                 setLocation(paddle, x, y);
             }
         }
+        
     }
 
     // wait for click before exiting
