@@ -210,7 +210,9 @@ GLabel initScoreboard(GWindow window)
     char* points = "0";
     GLabel label = newGLabel(points);
     setFont(label, "SansSerif-36");
-    setLocation(label, (getWidth(window) / 2), (getHeight(window) / 2));
+    double x = (getWidth(window) - getWidth(label)) / 2;
+    double y = (getHeight(window) - getHeight(label)) / 2;
+    setLocation(label, x, y);
     addGWindow(window, label);
     return label;
 }
