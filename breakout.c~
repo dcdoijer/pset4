@@ -104,6 +104,7 @@ int main(void)
                 bricks--;
                 points++;
                 vert = -vert;
+                updateScoreboard(window, scoreboard, points);
             }
         }
 
@@ -207,11 +208,11 @@ GRect initPaddle(GWindow window)
 GLabel initScoreboard(GWindow window)
 {
     char* points = "0";
-    GLabel scoreboard = newGLabel(points);
-    setFont(scoreboard, "SansSerif-36");
-    setLocation(scoreboard, (getWidth(window) / 2), (getHeight(window) / 2));
-    addGWindow(window, scoreboard);
-    return scoreboard;
+    GLabel label = newGLabel(points);
+    setFont(label, "SansSerif-36");
+    setLocation(label, (getWidth(window) / 2), (getHeight(window) / 2));
+    addGWindow(window, label);
+    return label;
 }
 
 /**
