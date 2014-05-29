@@ -61,7 +61,7 @@ int main(void)
 
     // instantiate window
     GWindow window = newGWindow(WIDTH, HEIGHT);
-
+    
     // instantiate bricks
     initBricks(window);
 
@@ -88,7 +88,20 @@ int main(void)
 
         move(ball, hori, vert);
         GObject object = detectCollision(window, ball);
-
+        
+        // if the ball hits the top invert direction
+        // if ball hits bottom, deduct life and restart main
+        if (getY(ball) + getHeight(ball) >= HEIGHT)
+        {
+            lives--;
+            waitForClick();
+            setLocation(ball, 190, 290);
+        }
+        else if (getY(ball) <= 0)
+        {
+            vert = -vert;
+        }
+        
         // if the ball hits the paddle, invert vertical direction    
         if (object == paddle)
         {
@@ -109,19 +122,7 @@ int main(void)
             }
         }
 
-        // if the ball hits the top invert direction
-        // if ball hits bottom, deduct life and restart main
-        if (getY(ball) + getHeight(ball) >= HEIGHT)
-        {
-            lives--;
-            main();
-        }   
-        else if (getY(ball) <= 0)
-        {
-            vert = -vert;
-        }
-        
-        // if the ball hits the sides, invert direction
+                // if the ball hits the sides, invert direction
         if (getX(ball) + getWidth(ball) >= WIDTH)
         {
             hori = -hori;
