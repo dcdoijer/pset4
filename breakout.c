@@ -37,8 +37,8 @@
 #define P_HEIGHT 10
 
 // width and height of the bricks
-#define B_WIDTH 20
-#define B_HEIGHT 4
+#define B_WIDTH 30
+#define B_HEIGHT 10
 
 // prototypes
 void initBricks(GWindow window);
@@ -159,7 +159,7 @@ int main(void)
 void initBricks(GWindow window)
 {
     // initialize first brick position
-    int brick_x = 50;
+    int brick_x = 4;
     int brick_y = 50;
     char* colors[5] = {"RED", "GREEN", "BLUE", "ORANGE", "YELLOW"};
 
@@ -171,10 +171,10 @@ void initBricks(GWindow window)
             setFilled(bricks, true);
             setColor(bricks, colors[rows]);
             addGWindow(window, bricks);
-            brick_x += 30;
+            brick_x += 40;
         }
         brick_y += 15;
-        brick_x = 50;
+        brick_x = 4;
     }
 }
 
