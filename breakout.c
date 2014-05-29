@@ -47,9 +47,15 @@ GRect initPaddle(GWindow window);
 GLabel initScoreboard(GWindow window);
 void updateScoreboard(GWindow window, GLabel label, int points);
 GObject detectCollision(GWindow window, GOval ball);
+    
+// number of lives initially
+int lives = LIVES;
 
+// number of points initially
+int points = 0;
+   
 int main(void)
-{
+{      
     // seed pseudorandom number generator
     srand48(time(NULL));
 
@@ -70,21 +76,15 @@ int main(void)
 
     // number of bricks initially
     int bricks = COLS * ROWS;
-
-    // number of lives initially
-    int lives = LIVES;
-
-    // number of points initially
-    int points = 0;
-
+    
     double drand48(void);
     double vert = 2.0;
     double hori = 2 * drand48();
-    
-    
+
     // keep playing until game over
     while (lives > 0 && bricks > 0)
     {
+
         move(ball, hori, vert);
         GObject object = detectCollision(window, ball);
 
@@ -113,6 +113,7 @@ int main(void)
         if (getY(ball) + getHeight(ball) >= HEIGHT)
         {
             lives--;
+            main();
         }   
         else if (getY(ball) <= 0)
         {
@@ -147,8 +148,6 @@ int main(void)
 
     // wait for click before exiting
     waitForClick();
-
-    // game over
     closeGWindow(window);
     return 0;
 }
@@ -210,6 +209,7 @@ GLabel initScoreboard(GWindow window)
     char* points = "0";
     GLabel label = newGLabel(points);
     setFont(label, "SansSerif-36");
+    setColor(label, "GRAY");
     double x = (getWidth(window) - getWidth(label)) / 2;
     double y = (getHeight(window) - getHeight(label)) / 2;
     setLocation(label, x, y);
