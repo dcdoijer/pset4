@@ -82,6 +82,7 @@ int main(void)
     double hori = 2 * drand48();
 
     // keep playing until game over
+    waitForClick();
     while (lives > 0 && bricks > 0)
     {
 
